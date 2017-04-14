@@ -415,24 +415,29 @@ hr {
 
   $base: 2;
   $exponent: 1;
-  $limit: 11;
+  $limit: 16;
 
   // Colors for all 11 states, false = no special color
-  $special-colors: false false, // 2
-                   false false, // 4
-                   #f78e48 true, // 8
-                   #fc5e2e true, // 16
-                   #ff3333 true, // 32
-                   #ff0000 true, // 64
-                   false true, // 128
-                   false true, // 256
-                   false true, // 512
-                   false true, // 1024
-                   false true; // 2048
+  $special-colors: false false, // 1
+                   false false, // 2
+                   #f78e48 true, // 3
+                   #fc5e2e true, // 5
+                   #ff3333 true, // 8
+                   #ff0000 true, // 13
+                   false true, // 21
+                   false true, // 55
+                   false true, // 89
+                   false true, // 144
+                   false true, // 233
+                   false true, // 377
+                   false true, // 610
+                   false true, // 987
+                   false true, // 1597
+                   false true; // 2584
 
   // Build tile colors
   @while $exponent <= $limit {
-    $power: pow($base, $exponent);
+    $power: #{round((pow(1.618, $exponent+1) - pow(0.618, $exponent+1)) / 2.236)};
 
     &.tile-#{$power} .tile-inner {
       // Calculate base background color
@@ -464,7 +469,7 @@ hr {
       }
 
       // Adjust font size for bigger numbers
-      @if $power >= 100 and $power < 1000 {
+      @if #{$power} >= 100 and #{$power} < 1000 {
         font-size: 45px;
 
         // Media queries placed here to avoid carrying over the rest of the logic
@@ -483,7 +488,7 @@ hr {
     $exponent: $exponent + 1;
   }
 
-  // Super tiles (above 2048)
+  // Super tiles (above 2584)
   &.tile-super .tile-inner {
     color: $bright-text-color;
     background: mix(#333, $tile-gold-color, 95%);
