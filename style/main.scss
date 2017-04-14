@@ -415,7 +415,7 @@ hr {
 
   $base: 2;
   $exponent: 1;
-  $limit: 16;
+  $limit: 18;
 
   // Colors for all 11 states, false = no special color
   $special-colors: false false, // 1
@@ -437,7 +437,7 @@ hr {
 
   // Build tile colors
   @while $exponent <= $limit {
-    $power: #{round((pow(1.618, $exponent+1) - pow(0.618, $exponent+1)) / 2.236)};
+    $power: #{round((pow(1.6180339887498949, $exponent+1) - pow(0.6180339887498949, $exponent+1)) / 2.23606797749979)};
 
     &.tile-#{$power} .tile-inner {
       // Calculate base background color
